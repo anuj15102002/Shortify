@@ -7,13 +7,11 @@ import com.url.shortner.backend.services.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.management.relation.Role;
 import java.security.Principal;
+import java.util.List;
 import java.util.Map;
 
 import static org.springframework.security.authorization.AuthorityAuthorizationManager.*;
@@ -31,11 +29,19 @@ public class UrlMappingController {
 
     @PostMapping("/shorten")
     @PreAuthorize("hasRole('USER')")
-    public ResponseEntity<UrlMappingDTO> createShortUrl(@RequestBody Map<String,String> request, Principal principal)
-    {
+    public ResponseEntity<UrlMappingDTO> createShortUrl(@RequestBody Map<String, String> request, Principal principal) {
         String orignalUrl = request.get("originalUrl");
         Users user = userService.findByUsername(principal.getName());
         UrlMappingDTO urlMappingDTO = urlMappingService.createShortUrl(orignalUrl, user);
         return ResponseEntity.ok(urlMappingDTO);
     }
+
+    @GetMapping("/getUrls")
+    @PreAuthorize("hasRole('USER')")
+    public ResponseEntity<List<UrlMappingDTO>> getUserUrls(Principal principal){
+        Users user = userService.findByUsername(principal.getName());
+        List<UrlMappingDTO> urls = urlMappingService.getUrlsByUser(user);
+        return ResponseEntity.ok(urls);
+    }
+
 }
