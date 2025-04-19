@@ -1,4 +1,4 @@
-import React from 'react'
+giimport React from 'react'
 import { FaExclamationTriangle } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'
 
