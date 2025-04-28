@@ -15,6 +15,7 @@ export const useFetchMyShortUrls = (token, onError) => {
                 },
             }
         );
+        
     },
           {
             select: (data) => {
@@ -30,10 +31,14 @@ export const useFetchMyShortUrls = (token, onError) => {
 };
 
 export const useFetchTotalClicks = (token, onError) => {
+
+    const startDate = "2025-01-01";
+    const endDate = new Date().toISOString().split("T")[0];
+
     return useQuery("url-totalclick",
          async () => {
             return await api.get(
-                "/api/urls/totalClicks?startDate=2024-01-01&endDate=2025-12-31",
+                "/api/urls/totalClicks?startDate=2025-01-01&endDate=2025-12-12",
             {
                 headers: {
                     "Content-Type": "application/json",

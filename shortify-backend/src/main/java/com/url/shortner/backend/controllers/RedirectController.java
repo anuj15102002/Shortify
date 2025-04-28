@@ -25,9 +25,3 @@ public class RedirectController {
             httpHeaders.add("Location", urlMapping.getOriginalUrl());
             return ResponseEntity.status(302).headers(httpHeaders).build();
         }
-        else {
-            return ResponseEntity.notFound().build();
-
-        }
-    }
-}

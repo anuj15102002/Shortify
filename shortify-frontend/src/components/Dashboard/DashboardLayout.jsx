@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Graph from './Graph'
+import DashboardGraph from './DashboardGraph'
 import { dummyData } from '../../dummyData/data'
 import { useStoreContext } from '../../contextApi/ContextApi'
 import { useFetchMyShortUrls, useFetchTotalClicks } from '../../hooks/useQuery'
@@ -43,7 +43,7 @@ const DashboardLayout = () => {
                      </h3>
                    </div>
                 )}
-                <Graph graphData={totalClicks} />
+                <DashboardGraph graphData={totalClicks} />
             </div>
             <div className='py-5 sm:text-end text-center'>
                 <button

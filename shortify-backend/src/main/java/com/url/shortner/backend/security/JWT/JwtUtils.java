@@ -6,6 +6,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import javax.crypto.SecretKey;
 import java.security.Key;
@@ -16,7 +17,8 @@ import java.util.stream.Collectors;
 @Component
 public class JwtUtils {
 
-    private final String jwtSecret = "f237797ec47c09744ae13e89a28f4a8cd3c23a8b158271d7ebb2ebcddfc5b0f1a7a9396aef3a0a161f9cd51e6363875be21a4d1083a529f5bf81ca62d273633a";
+    @Value("${jwt.secret}")
+    private String jwtSecret;
 
 
     public String getJwtFromHeader(HttpServletRequest request) {
